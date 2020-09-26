@@ -12,6 +12,7 @@
 enum custom_keys {
         CU_TEST = SAFE_RANGE,
         CU_PASS,
+        CU_LCPS,
         CU_QQ
 };
 
@@ -52,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 CU_TEST,  RGB_TOG,  RGB_MOD,  RGB_HUI,  RGB_HUD,  RGB_SAI,  RGB_SAD,  RGB_VAI,  RGB_VAD,  CU_PASS,      KC_MPLY,  KC_MPRV,  KC_MNXT,  RESET  ,\
                 KC_CAPS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_VOLU,  KC_PGUP,      KC_HOME,  KC_END,             DF(CSGO_LAYER),\
       DF(DEFAULT_LAYER),  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_BRID,  KC_BRIU,  KC_MUTE,  KC_VOLD,  KC_PGDN,      KC_PSCR,  DF(DVORAK_LAYER), \
-                KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_MPLY,                                KC_TRNS,      KC_F14,   KC_RSFT,            KC_RCTL),
+                KC_TRNS,  KC_TRNS,  CU_LCPS,                      KC_MPLY,                                KC_TRNS,      KC_F14,   KC_RSFT,            KC_RCTL),
 
         [FN_CSGO_LAYER] = LAYOUT_ANSI(
                 KC_F13,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,        KC_F10,   KC_F11,   KC_F12,   KC_DEL ,\
@@ -95,6 +96,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         }
                         break;
                 case CU_PASS:
+                        if (record->event.pressed) {
+                                SEND_STRING("testingstring");
+                        }
+                        break;
+                case CU_LCPS:
                         if (record->event.pressed) {
                                 SEND_STRING("testingstring");
                         }
